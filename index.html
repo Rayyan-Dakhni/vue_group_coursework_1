@@ -12,25 +12,41 @@
   <body>
     <div id="app">
       <header>
-        <h1>After School Club</h1>
+        <h1>{{sitename}}</h1>
       </header>
       <main>
         <div style="display: inline-flex">
           <figure>
             <img
-              src="images/math.svg"
+              v-bind:src="product.image"
               alt="Subject Math"
               style="height: 100px; width: auto"
             />
           </figure>
           <div>
-            <h2>Math</h2>
-            <p>London</p>
-            <p>Price: 100</p>
-            <p>Number of Spaces: 10</p>
+            <h2>{{product.subject}}</h2>
+            <p>{{product.location}}</p>
+            <p>Price: {{product.price}}</p>
+            <p>Number of Spaces: {{product.spacesAvailable}}</p>
           </div>
         </div>
         <br />
+        <button
+          style="
+            width: 300px;
+            padding: 8px;
+            background-color: #6d28d9;
+            color: white;
+            font-weight: 400;
+            font-size: medium;
+            border-radius: 10px;
+            border: none;
+          "
+          v-on:click="addToCart"
+          v-if="canAddToCart"
+        >
+          Add to Cart
+        </button>
         <button
           style="
             width: 300px;
@@ -42,6 +58,8 @@
             border-radius: 10px;
             border: none;
           "
+          v-else
+          disabled
         >
           Add to Cart
         </button>
@@ -66,13 +84,12 @@
         methods: {
           addToCart: function () {
             this.cart.push(this.product.id);
-            this.product.availableInventory =
-              this.product.availableInventory - 1;
+            this.product.spacesAvailable = this.product.spacesAvailable - 1;
           },
         },
         computed: {
           canAddToCart: function () {
-            return this.product.availableInventory > 0;
+            return this.product.spacesAvailable > 0;
           },
         },
       });
