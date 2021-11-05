@@ -51,7 +51,18 @@
     <script>
       const app = new Vue({
         el: "#app",
-        data: {},
+        data: {
+          sitename: "After School Club",
+          product: {
+            id: 1001,
+            subject: "Mathematics",
+            location: "London",
+            price: 2000,
+            image: "images/math.svg",
+            spacesAvailable: 5,
+          },
+          cart: [],
+        },
         methods: {},
       });
     </script>
