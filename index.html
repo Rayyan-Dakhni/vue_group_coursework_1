@@ -63,7 +63,18 @@
           },
           cart: [],
         },
-        methods: {},
+        methods: {
+          addToCart: function () {
+            this.cart.push(this.product.id);
+            this.product.availableInventory =
+              this.product.availableInventory - 1;
+          },
+        },
+        computed: {
+          canAddToCart: function () {
+            return this.product.availableInventory > 0;
+          },
+        },
       });
     </script>
   </body>
